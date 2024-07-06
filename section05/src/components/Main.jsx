@@ -1,3 +1,4 @@
+import "./Main.css";
 // JSX : Javscript Extentions, js와 html 혼용 허용 문법
 
 // JSX 주의 사항 !
@@ -10,18 +11,18 @@
 // 6. 최상위 태그는 반드시 1개여야 한다. ex:) return <> ... </>
 
 const Main = () => {
-  const number = 12; // 숫자, 문자열 모두 가능 -> {number}
-  const obj = { a: 1 };
-  return (
-    <main>
-      <h1>main</h1>
-      <h2>{number % 2 === 0 ? "짝수" : "홀수"}</h2>
-      <h1>{1}</h1>
-      <h1>{"하하이"}</h1>
-      <h1>{[1, 2, 3]}</h1>
-      <h2>{obj.a}</h2>
-    </main>
-  );
+  const user = {
+    name: "이정환",
+    isLogin: true,
+  };
+
+  if (user.isLogin) {
+    return <div className="logout">로그아웃</div>; // 자바스크립트의 예약어인 class를 쓸수없기에,,, className이 되버린 것.
+  } else {
+    return <div>로그인</div>;
+  }
+
+  // return <>{user.isLogin ? <div>[로그아웃]</div> : <div>[로그인]</div>}</>;
 };
 
 export default Main;
