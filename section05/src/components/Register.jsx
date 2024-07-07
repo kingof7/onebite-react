@@ -6,44 +6,51 @@
 import { useState } from "react";
 
 const Register = () => {
-    const [name, setName] = useState("이름");
-    const [birth, setBirth] = useState("");
-    const [country, setCountry] = useState("");
-    const [bio, setBio] = useState("");
+  const [input, setInput] = useState({
+    name: "",
+    birth: "",
+    country: "",
+    bio: "",
+  });
 
-    const onChangeName = (e) => {
-        setName(e.target.value);
-    };
+  const onChange = (e) => {
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value, // let var["key"] = value // 이거랑 원리가 같음. // [e.target.name] : 대괄호로 감싸서 키로 만듬. <- e.target.name는 각 태그에 적은 name 태그의 값
+    });
+  };
 
-    const onChangeBirth = (e) => {
-        setBirth(e.target.value);
-    };
-
-    const onChangeCountry = (e) => {
-        setCountry(e.target.value);
-    };
-
-    const onChangeBio = (e) => {
-        setBio(e.target.value);
-    };
-
-    return (
-        <div>
-            <div><input value={ name } onChange={onChangeName} placeholder={"이름"} /></div>
-            <div><input value={ birth } onChange={onChangeBirth} type="date" /></div>
-            <div>
-                <select value={ country } onChange={onChangeCountry}>
-                    <option></option>
-                    <option value="KR">한국</option>
-                    <option value="US">미국</option>
-                    <option value="UK">영국</option>
-                </select>
-            </div>
-            <div>
-                <textarea value={bio} onChange={onChangeBio} />
-            </div>
-        </div>
-    );
+  return (
+    <div>
+      <div>
+        <input
+          name="name"
+          value={input.name}
+          onChange={onChange}
+          placeholder={"이름"}
+        />
+      </div>
+      <div>
+        <input
+          name="birth"
+          value={input.birth}
+          onChange={onChange}
+          type="date"
+        />
+      </div>
+      <div>
+        <select name="country" value={input.country} onChange={onChange}>
+          <option value=""></option>
+          <option value="KR">한국</option>
+          <option value="US">미국</option>
+          <option value="UK">영국</option>
+        </select>
+      </div>
+      <div>
+        <textarea name="bio" value={input.bio} onChange={onChange} />
+      </div>
+    </div>
+  );
 };
 
 export default Register;
