@@ -5,12 +5,15 @@ import { useEffect, useState } from "react";
 
 function App() {
   const [count, setCount] = useState(0);
+  const [input, setInput] = useState("");
   useEffect(() => {
-    console.log(`count: ${count}`);
-  }, [count]); // count의 값이 바뀔 때마다, 첫번째인자(콜백함수)를 실행
+    console.log(`count: ${count} / input: ${input}`);
+  }, [count, input]); // 의존성 배열, deps(=dependency array)
+  // count의 값이 바뀔 때마다, 첫번째인자(콜백함수)를 실행
   // value = -1, -10, -100, +100, +10, +1
   const onClickButton = (value) => {
     setCount(count + value);
+    console.log(count); // 이전의 값이 출력되므로 여기다가 사용하면 안됨, useEffect를 통해서 변경된 스테이트값을 이용해야함
   };
 
   // ****
@@ -27,6 +30,11 @@ function App() {
   return (
     <div className="App">
       <h1>Simple Counter</h1>
+      <section>
+        <input value={input} onChange={(e)=>{
+          setInput(e.target.value);
+        }} />
+      </section>
       <section>
         <Viewer count={count} />
       </section>
